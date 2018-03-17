@@ -150,4 +150,9 @@ lcd.write_char(5)
 sleep(2)
 
 lcd.clear()
+
+
+lcd.set_cursor(col=1, row=1)
+lcd.write_msg("HOLA NICO!!!!!")  #Agregue este comando a la libreria!!!
+
 lcd.set_backlight(False)
