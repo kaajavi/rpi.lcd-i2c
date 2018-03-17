@@ -14,7 +14,7 @@ Made available under GNU GENERAL PUBLIC LICENSE
 """
 import smbus
 from time import *
-
+import six
 # some const
 # LCD Address
 LCD_ADDRESS = 0x27
@@ -158,6 +158,20 @@ class LCD:
         """
         self._strobe(Rs | (char_value & 0xF0))
         self._strobe(Rs | ((char_value << 4) & 0xF0))
+        
+    def write_msg(self, string_value):
+        """
+        Send Data to LCD panel from string
+
+        :param string_value: value of string
+        :type string_value: String
+        """
+        if isinstance(string_value, six.string_types):
+            for char_value in string_value:
+                self._strobe(Rs | (char_value & 0xF0))
+                self._strobe(Rs | ((char_value << 4) & 0xF0))
+        else:
+            raise ValueError('Value is not string.')
 
     def message(self, string):
         """
